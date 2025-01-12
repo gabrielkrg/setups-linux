@@ -1,7 +1,26 @@
 #!/bin/bash
 
-# Default PHP version
+# Default values
 PHP_VERSION="8.3"
+DOCKER_INSTALL=false
+
+# Parse command-line arguments
+for arg in "$@"
+do
+    case $arg in
+        --php-version=*)
+        PHP_VERSION="${arg#*=}"
+        shift
+        ;;
+        --docker=*)
+        if [ "${arg#*=}" == "true" ]; then
+            DOCKER_INSTALL=true
+        fi
+        shift
+        ;;
+    esac
+done
+
 
 # Update package list
 sudo apt update
@@ -27,5 +46,46 @@ sudo apt -y install npm
 
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+
+# Install Docker and Docker Compose if --docker=true
+if [ "$DOCKER_INSTALL" = true ]; then
+    echo "Installing Docker and Docker Compose..."
+
+    # Remove conflicting packages
+    for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do
+        sudo apt-get remove -y $pkg
+    done
+
+    # Install Docker prerequisites
+    sudo apt-get update
+    sudo apt-get install -y ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+    # Add Docker repository to Apt sources
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+    # Install Docker and Docker Compose
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+    # Start Docker service
+    sudo systemctl start docker
+    sudo systemctl enable docker
+
+    # Verify Docker and Docker Compose installation
+    docker --version
+    docker-compose --version
+fi
+
+# Notify user of completion
+echo "Installation complete: PHP $PHP_VERSION, Composer, NVM, and Node.js installed successfully."
+if [ "$DOCKER_INSTALL" = true ]; then
+    echo "Docker and Docker Compose have been installed."
+fi
 
 source ~/.bashrc
