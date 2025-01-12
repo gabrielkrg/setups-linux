@@ -2,29 +2,7 @@
 
 # Default values
 PHP_VERSION="8.3"
-DOCKER_INSTALL=false
-
-# Parse URL query parameters
-QUERY_STRING="$1"
-
-# Extract php-version and docker flags from query string
-for param in $(echo $QUERY_STRING | tr "&" "\n")
-do
-    key=$(echo $param | cut -d= -f1)
-    value=$(echo $param | cut -d= -f2)
-
-    case $key in
-        php-version)
-            PHP_VERSION=$value
-            ;;
-        docker)
-            if [ "$value" == "true" ]; then
-                DOCKER_INSTALL=true
-            fi
-            ;;
-    esac
-done
-
+DOCKER_INSTALL=true
 
 # Update package list
 sudo apt update
