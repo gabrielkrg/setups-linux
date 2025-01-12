@@ -3,11 +3,6 @@
 # Update package list
 sudo apt update
 
-# GIT configs & SSH
-git config --global user.email "your@email.com"
-git config --global user.name "Gabriel"
-ssh-keygen -t ed25519 -C "your@email.com"
-
 # Install prerequisites for PHP and add PHP repository
 sudo apt -y install software-properties-common
 sudo add-apt-repository -y ppa:ondrej/php
