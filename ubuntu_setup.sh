@@ -64,6 +64,10 @@ if [ "$DOCKER_INSTALL" = true ]; then
     # Verify Docker and Docker Compose installation
     docker --version
     docker-compose --version
+
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    newgrp docker
 fi
 
 # Notify user of completion
