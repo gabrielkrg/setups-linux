@@ -5,7 +5,7 @@ PHP_VERSION="8.3"
 DOCKER_INSTALL=false
 
 # Parse URL query parameters
-QUERY_STRING=$(echo "$1" | sed -e 's/^[^?]*\?//')
+QUERY_STRING="$1"
 
 # Extract php-version and docker flags from query string
 for param in $(echo $QUERY_STRING | tr "&" "\n")
