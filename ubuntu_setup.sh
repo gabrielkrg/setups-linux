@@ -21,6 +21,11 @@ sudo apt -y install curl php-cli unzip
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
+# Install node & npm
+sudo apt -y install nodejs
+sudo apt -y install npm
+
+
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
 
