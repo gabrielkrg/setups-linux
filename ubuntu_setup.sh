@@ -11,11 +11,11 @@ sudo apt update
 sudo apt -y install software-properties-common
 sudo add-apt-repository -y ppa:ondrej/php
 
-# Install PHP 8.3 and PHP-FPM 8.3
-sudo apt -y install php8.3 php8.3-fpm
+# Install PHP and PHP-FPM using the PHP_VERSION variable
+sudo apt -y install php$PHP_VERSION php$PHP_VERSION-fpm
 
-# Install PHP extensions for PHP 8.3
-sudo apt -y install php8.3-pdo php8.3-mysql php8.3-mbstring php8.3-exif php8.3-gd php8.3-curl
+# Install PHP extensions for the specified PHP version
+sudo apt -y install php$PHP_VERSION-pdo php$PHP_VERSION-mysql php$PHP_VERSION-mbstring php$PHP_VERSION-exif php$PHP_VERSION-gd php$PHP_VERSION-curl
 
 # Install Composer
 sudo apt -y install curl php-cli unzip
