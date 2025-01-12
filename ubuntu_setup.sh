@@ -15,7 +15,7 @@ sudo add-apt-repository -y ppa:ondrej/php
 sudo apt -y install php8.3 php8.3-fpm
 
 # Install PHP extensions for PHP 8.3
-sudo apt -y install php8.3-pdo php8.3-mysql php8.3-mbstring php8.3-exif php8.3-gd
+sudo apt -y install php8.3-pdo php8.3-mysql php8.3-mbstring php8.3-exif php8.3-gd php8.3-curl
 
 # Install Composer
 sudo apt -y install curl php-cli unzip
