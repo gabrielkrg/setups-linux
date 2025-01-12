@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Default PHP version
+PHP_VERSION="8.3"
+
 # Update package list
 sudo apt update
 
