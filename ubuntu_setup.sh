@@ -25,13 +25,7 @@ sudo mv composer.phar /usr/local/bin/composer
 sudo apt -y install nodejs
 sudo apt -y install npm
 
-
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
 
-# Source NVM and install Node.js
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-# Install Node.js using NVM
-nvm install node
+source ~/.bashrc
