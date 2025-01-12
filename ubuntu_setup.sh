@@ -4,20 +4,24 @@
 PHP_VERSION="8.3"
 DOCKER_INSTALL=false
 
-# Parse command-line arguments
-for arg in "$@"
+# Parse URL query parameters
+QUERY_STRING=$(echo "$1" | sed -e 's/^[^?]*\?//')
+
+# Extract php-version and docker flags from query string
+for param in $(echo $QUERY_STRING | tr "&" "\n")
 do
-    case $arg in
-        --php-version=*)
-        PHP_VERSION="${arg#*=}"
-        shift
-        ;;
-        --docker=*)
-        if [ "${arg#*=}" == "true" ]; then
-            DOCKER_INSTALL=true
-        fi
-        shift
-        ;;
+    key=$(echo $param | cut -d= -f1)
+    value=$(echo $param | cut -d= -f2)
+
+    case $key in
+        php-version)
+            PHP_VERSION=$value
+            ;;
+        docker)
+            if [ "$value" == "true" ]; then
+                DOCKER_INSTALL=true
+            fi
+            ;;
     esac
 done
 
@@ -46,6 +50,10 @@ sudo apt -y install npm
 
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Install Docker and Docker Compose if --docker=true
 if [ "$DOCKER_INSTALL" = true ]; then
