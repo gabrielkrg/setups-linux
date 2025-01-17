@@ -76,4 +76,8 @@ if [ "$DOCKER_INSTALL" = true ]; then
     echo "Docker and Docker Compose have been installed."
 fi
 
+mkdir t
+cd t
+git clone https://github.com/gabrielkrg/docker-enviroment.git
+
 source ~/.bashrc
