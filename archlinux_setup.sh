@@ -1,17 +1,23 @@
-sudo pacman-key --init
-sudo pacman-key --populate
-sudo pacman -Sy archlinux-keyring
-sudo pacman -Su
+#!/bin/bash
+set -e
 
-sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+# Update keyring and packages
+pacman-key --init
+pacman-key --populate
+pacman -Sy archlinux-keyring
+pacman -Su --noconfirm
 
-yay -S php php-fpm php-sqlite
-yay -S php-sqlite
+# Install yay
+pacman -S --needed --noconfirm git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --noconfirm
+cd ..
 
-yay -S composer
-yay -S nvm
+# Install packages
+yay -S --noconfirm php php-fpm php-sqlite composer nvm docker docker-compose
 
-yay -S docker
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER
-yay -S docker-compose
+# Enable and configure Docker
+systemctl enable --now docker
+usermod -aG docker $USER
+newgrp docker
