@@ -2,17 +2,13 @@
 set -e
 
 # Update keyring and packages
-# pacman-key --init
-# pacman-key --populate
-# pacman -Sy archlinux-keyring
-# pacman -Su --noconfirm
+sudo pacman-key --init
+sudo pacman-key --populate
+sudo pacman -Sy archlinux-keyring
+sudo pacman -Su --noconfirm
 
 # Install yay
-pacman -S --needed --noconfirm git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
-cd ..
+sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # Install packages
 yay -S --noconfirm php php-fpm php-sqlite composer nvm docker docker-compose
