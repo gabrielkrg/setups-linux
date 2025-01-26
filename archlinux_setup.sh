@@ -2,10 +2,10 @@
 set -e
 
 # Update keyring and packages
-pacman-key --init
-pacman-key --populate
-pacman -Sy archlinux-keyring
-pacman -Su --noconfirm
+# pacman-key --init
+# pacman-key --populate
+# pacman -Sy archlinux-keyring
+# pacman -Su --noconfirm
 
 # Install yay
 pacman -S --needed --noconfirm git base-devel
