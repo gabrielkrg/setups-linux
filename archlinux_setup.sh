@@ -14,11 +14,11 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 yay -S --noconfirm php php-fpm php-sqlite composer nvm docker docker-compose
 
 # NVM
-nvm install --lts
-
 export NVM_DIR="$HOME/.nvm"
 [ -s /usr/share/nvm/nvm.sh ] && \. /usr/share/nvm/nvm.sh
 [ -s /usr/share/nvm/bash_completion ] && \. /usr/share/nvm/bash_completion
+
+nvm install --lts
 
 # Enable and configure Docker
 systemctl enable --now docker
