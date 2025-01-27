@@ -11,6 +11,8 @@ sudo pacman -Su --noconfirm
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # NVM
+nvm install --lts
+
 export NVM_DIR="$HOME/.nvm"
 [ -s /usr/share/nvm/nvm.sh ] && \. /usr/share/nvm/nvm.sh
 [ -s /usr/share/nvm/bash_completion ] && \. /usr/share/nvm/bash_completion
