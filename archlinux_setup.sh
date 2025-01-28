@@ -11,15 +11,7 @@ sudo pacman -Su --noconfirm
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # Install packages
-yay -S --noconfirm php php-fpm php-sqlite composer nvm docker docker-compose
-yay -S --noconfirm brave-bin discord
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s /usr/share/nvm/nvm.sh ] && \. /usr/share/nvm/nvm.sh
-[ -s /usr/share/nvm/bash_completion ] && \. /usr/share/nvm/bash_completion
-
-nvm install --lts
+yay -S --noconfirm php php-fpm php-sqlite composer docker docker-compose brave-bin discord
 
 # Enable and configure Docker
 systemctl enable --now docker
