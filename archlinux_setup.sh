@@ -11,7 +11,7 @@ sudo pacman -Su --noconfirm
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 # Install packages
-yay -S --noconfirm php php-fpm php-sqlite composer docker docker-compose brave-bin discord
+yay -S --noconfirm php php-fpm php-sqlite php-gd composer docker docker-compose zed brave-bin discord
 
 # Enable and configure Docker
 systemctl enable --now docker
