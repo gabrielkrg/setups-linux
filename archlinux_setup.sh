@@ -20,6 +20,7 @@ sudo systemctl enable --now php-fpm
 sudo systemctl enable --now valkey
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 sudo systemctl enable --now mariadb
+sudo mariadb-secure-installation
 
 sudo usermod -aG http gabriel
 
@@ -29,18 +30,24 @@ user = gabriel
 group = gabriel
 
 sudo mv /usr/share/webapps/phpMyAdmin /usr/share/webapps/phpmyadmin
-Access denied for user 'root'@'localhost' | ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+
+Access denied for user 'root'@'localhost'
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
 
 # Enable and configure Docker
-systemctl enable --now docker
-usermod -aG docker $USER
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
 newgrp docker
 
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip
 
 unzip -d JetBrainsMono ~/Download/JetBrainsMono.zip
-sudo mv ~/Download/JetBrainsMono /usr/share/fonts
+sudo mv ~/JetBrainsMono /usr/share/fonts
 
 fc-cache -fv
 
 curl -sS https://starship.rs/install.sh | sh
+
+# ~/.bashrc
+eval "$(starship init bash)"
+
